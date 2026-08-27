@@ -16,29 +16,32 @@ export interface HealthResponse {
  * Generic fetch wrapper with error handling.
  * Prevents leaking raw error details to the UI.
  */
-async function request<T>(endpoint: string): Promise<T> {
+async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`;
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers,
+  };
 
-  const response = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const response = await fetch(url, { ...options, headers });
 
   if (!response.ok) {
-    throw new Error(`API error: ${response.status} ${response.statusText}`);
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.detail || `API error: ${response.status} ${response.statusText}`);
   }
 
   return response.json() as Promise<T>;
 }
 
-/**
- * Check backend health status.
- */
 export async function checkHealth(): Promise<HealthResponse> {
   return request<HealthResponse>('/api/v1/health');
 }
 
 export default {
   checkHealth,
+  get: <T>(endpoint: string) => request<T>(endpoint, { method: 'GET' }),
+  post: <T>(endpoint: string, data?: any) => request<T>(endpoint, { method: 'POST', body: data ? JSON.stringify(data) : undefined }),
+  put: <T>(endpoint: string, data?: any) => request<T>(endpoint, { method: 'PUT', body: data ? JSON.stringify(data) : undefined }),
+  delete: <T>(endpoint: string) => request<T>(endpoint, { method: 'DELETE' }),
 };
