@@ -8,7 +8,11 @@ from app.schemas.risk import RiskScoreRead
 from app.schemas.recommendation import RecommendationRead, RecommendationCreate, RecommendationUpdate, RecommendationMetadata, RecommendationEvidence
 from app.schemas.investment import SecurityInvestmentRead
 from app.schemas.simulation import SimulationRead
-from app.schemas.compliance import ComplianceFrameworkRead, ComplianceControlRead, ControlAssessmentRead
+from app.schemas.compliance import (
+    ComplianceFrameworkRead, ComplianceRequirementRead, ComplianceApplicabilityRead,
+    ComplianceControlMappingRead, ComplianceEvidenceRead, ComplianceAssessmentRead,
+    ComplianceGapRead, ComplianceExceptionRead, FrameworkAssessmentSummary
+)
 from app.schemas.optimization import (
     CybersecurityInvestmentRead, CybersecurityInvestmentCreate,
     OptimizationRunRead, OptimizationRunRequest,
@@ -51,9 +55,14 @@ __all__ = [
     "RiskScenarioCreate",
     "SimulationRead",
     "ComplianceFrameworkRead",
-    "ComplianceControlRead",
-    "ControlAssessmentRead",
-    "ControlAssessmentRead",
+    "ComplianceRequirementRead",
+    "ComplianceApplicabilityRead",
+    "ComplianceControlMappingRead",
+    "ComplianceEvidenceRead",
+    "ComplianceAssessmentRead",
+    "ComplianceGapRead",
+    "ComplianceExceptionRead",
+    "FrameworkAssessmentSummary",
     "FinancialAssumptionCreate",
     "FinancialAssumptionRead",
     "FinancialAssumptionUpdate",

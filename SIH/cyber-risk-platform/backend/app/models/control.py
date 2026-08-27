@@ -41,8 +41,12 @@ class SecurityControl(Base, UUIDMixin, TimestampMixin):
     status: Mapped[str] = mapped_column(String(50), index=True, default="active", nullable=False)
     owner: Mapped[str | None] = mapped_column(String(255), nullable=True)
     
+    # Module 11 fields
+    implementation_status: Mapped[str] = mapped_column(String(50), default="unknown", nullable=False)
+    
     implementation_date: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     last_assessed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    next_review_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     # Relationships
     organization: Mapped["Organization"] = relationship("Organization", back_populates="security_controls")

@@ -14,6 +14,7 @@ from app.api.v1 import financial_risk
 from app.api.v1 import predictions
 from app.api.v1 import recommendations
 from app.api.v1 import optimization
+from app.api.v1 import compliance
 
 api_router = APIRouter()
 
@@ -29,3 +30,4 @@ api_router.include_router(financial_risk.router)
 api_router.include_router(predictions.router, prefix="/predictions", tags=["Predictions"])
 api_router.include_router(recommendations.router, prefix="/recommendations", tags=["Recommendations"])
 api_router.include_router(optimization.router, prefix="/optimization", tags=["Optimization"])
+api_router.include_router(compliance.router, prefix="/compliance", tags=["Compliance"])

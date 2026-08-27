@@ -10,6 +10,7 @@ import { FinancialRisk } from './pages/FinancialRisk';
 import { RiskPrediction } from './pages/RiskPrediction';
 import { Recommendations } from './pages/Recommendations';
 import { BudgetOptimization } from './pages/BudgetOptimization';
+import Compliance from './pages/Compliance';
 
 import React, { useState, useEffect } from 'react';
 import { riskService } from './services/riskService';
@@ -150,6 +151,7 @@ function App() {
           <Route path="/risk-prediction" element={<RiskPrediction />} />
           <Route path="/recommendations" element={<Recommendations />} />
           <Route path="/optimization" element={<BudgetOptimization />} />
+          <Route path="/compliance" element={<Compliance />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

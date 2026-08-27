@@ -12,7 +12,13 @@ if TYPE_CHECKING:
     from app.models.control import SecurityControl
     from app.models.risk import RiskScore
     from app.models.recommendation import Recommendation
-    from app.models.compliance import ControlAssessment
+    from app.models.compliance import (
+        ComplianceApplicability,
+        ComplianceEvidence,
+        ComplianceAssessment,
+        ComplianceGap,
+        ComplianceException
+    )
 
 
 class Organization(Base, UUIDMixin, TimestampMixin):
@@ -46,6 +52,18 @@ class Organization(Base, UUIDMixin, TimestampMixin):
     recommendations: Mapped[list["Recommendation"]] = relationship(
         "Recommendation", back_populates="organization", cascade="all, delete-orphan"
     )
-    control_assessments: Mapped[list["ControlAssessment"]] = relationship(
-        "ControlAssessment", back_populates="organization", cascade="all, delete-orphan"
+    compliance_applicability: Mapped[list["ComplianceApplicability"]] = relationship(
+        "ComplianceApplicability", cascade="all, delete-orphan"
+    )
+    compliance_evidence: Mapped[list["ComplianceEvidence"]] = relationship(
+        "ComplianceEvidence", cascade="all, delete-orphan"
+    )
+    compliance_assessments: Mapped[list["ComplianceAssessment"]] = relationship(
+        "ComplianceAssessment", cascade="all, delete-orphan"
+    )
+    compliance_gaps: Mapped[list["ComplianceGap"]] = relationship(
+        "ComplianceGap", cascade="all, delete-orphan"
+    )
+    compliance_exceptions: Mapped[list["ComplianceException"]] = relationship(
+        "ComplianceException", cascade="all, delete-orphan"
     )
