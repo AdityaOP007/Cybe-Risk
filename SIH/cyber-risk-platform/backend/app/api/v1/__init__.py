@@ -8,6 +8,7 @@ from app.api.v1 import assets
 from app.api.v1 import vulnerabilities
 from app.api.v1 import controls
 from app.api.v1 import telemetry
+from app.api.v1 import threat_intel
 
 api_router = APIRouter()
 
@@ -17,3 +18,4 @@ api_router.include_router(assets.router, prefix="/assets", tags=["Assets"])
 api_router.include_router(vulnerabilities.router, prefix="/vulnerabilities", tags=["Vulnerabilities"])
 api_router.include_router(controls.router, prefix="/controls", tags=["Security Controls"])
 api_router.include_router(telemetry.router, prefix="/telemetry", tags=["Security Telemetry"])
+api_router.include_router(threat_intel.router, tags=["Threat Intelligence"])

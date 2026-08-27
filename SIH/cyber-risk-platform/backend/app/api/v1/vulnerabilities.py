@@ -44,3 +44,19 @@ def read_vulnerability(
     if not vulnerability:
         raise HTTPException(status_code=404, detail="Vulnerability not found")
     return vulnerability
+
+
+@router.get("/{vulnerability_id}/threat-intelligence", response_model=list[Any])
+def get_vulnerability_threat_intelligence(
+    vulnerability_id: uuid.UUID,
+    db: Session = Depends(get_db)
+) -> Any:
+    """
+    Get threat intelligence correlated with this vulnerability.
+    """
+    from app.models.threat_intel import ThreatCorrelation
+    correlations = db.query(ThreatCorrelation).filter(
+        ThreatCorrelation.vulnerability_id == vulnerability_id
+    ).all()
+    
+    return correlations

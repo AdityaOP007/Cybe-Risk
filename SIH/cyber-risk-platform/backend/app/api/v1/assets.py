@@ -179,6 +179,27 @@ def read_asset_telemetry(
         db, asset_id=id, skip=skip, limit=page_size, severity=severity, event_type=event_type
     )
 
+@router.get("/{id}/threat-intelligence", response_model=list[Any])
+def read_asset_threat_intelligence(
+    *,
+    db: Session = Depends(get_db),
+    id: uuid.UUID,
+) -> Any:
+    """
+    Get threat intelligence correlated with this asset.
+    """
+    from app.models.threat_intel import ThreatCorrelation
+    
+    asset = asset_service.get(db, id=id)
+    if not asset:
+        raise HTTPException(status_code=404, detail="Asset not found")
+        
+    correlations = db.query(ThreatCorrelation).filter(
+        ThreatCorrelation.asset_id == id
+    ).all()
+    
+    return correlations
+
 @router.delete("/{id}", response_model=AssetRead)
 def delete_asset(
     *,

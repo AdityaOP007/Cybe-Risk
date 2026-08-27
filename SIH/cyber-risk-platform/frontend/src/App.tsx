@@ -5,6 +5,7 @@ import { DashboardLayout } from './layouts/DashboardLayout';
 import { Assets } from './pages/Assets';
 import { AssetDetails } from './pages/AssetDetails';
 import { Telemetry } from './pages/Telemetry';
+import { ThreatIntelligence } from './pages/ThreatIntelligence';
 
 function Dashboard() {
   const backendStatus = useBackendStatus();
@@ -104,6 +105,7 @@ function App() {
           <Route path="/assets" element={<Assets />} />
           <Route path="/assets/:id" element={<AssetDetails />} />
           <Route path="/telemetry" element={<Telemetry />} />
+          <Route path="/threat-intel" element={<ThreatIntelligence />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

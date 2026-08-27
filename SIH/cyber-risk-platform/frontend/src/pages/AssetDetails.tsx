@@ -14,7 +14,7 @@ export const AssetDetails: React.FC = () => {
   
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'vulnerabilities' | 'telemetry' | 'risk'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'vulnerabilities' | 'telemetry' | 'threat-intel' | 'risk'>('overview');
 
   const fetchAssetData = useCallback(async () => {
     if (!id) return;
@@ -172,6 +172,7 @@ export const AssetDetails: React.FC = () => {
             { id: 'overview', name: 'Overview' },
             { id: 'vulnerabilities', name: 'Vulnerabilities', count: vulnerabilities.length },
             { id: 'telemetry', name: 'Telemetry', count: telemetry.length },
+            { id: 'threat-intel', name: 'Threat Intelligence' },
             { id: 'risk', name: 'Risk History' }
           ].map((tab) => (
             <button
@@ -281,6 +282,15 @@ export const AssetDetails: React.FC = () => {
                 ))}
               </ul>
             )}
+          </div>
+        )}
+
+        {activeTab === 'threat-intel' && (
+          <div className="p-6">
+            <h3 className="text-lg font-medium text-white mb-4">Correlated Threat Intelligence</h3>
+            <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-lg p-4 text-indigo-400">
+              Integration active. See the main Threat Intelligence dashboard for a global view and detailed correlations for this asset.
+            </div>
           </div>
         )}
 

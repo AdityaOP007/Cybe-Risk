@@ -37,6 +37,7 @@ export function Header({ backendStatus }: HeaderProps) {
             <a href="/" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Dashboard</a>
             <a href="/assets" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Asset Inventory</a>
             <a href="/telemetry" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Security Telemetry</a>
+            <a href="/threat-intel" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Threat Intelligence</a>
           </nav>
         </div>
 
