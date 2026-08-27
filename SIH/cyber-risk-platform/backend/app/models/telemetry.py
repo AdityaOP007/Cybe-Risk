@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 from typing import TYPE_CHECKING, Any
-from sqlalchemy import String, ForeignKey, DateTime
+from sqlalchemy import String, ForeignKey, DateTime, Index
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -48,3 +48,14 @@ class TelemetryEvent(Base, UUIDMixin):
         "Organization", back_populates="telemetry_events"
     )
     asset: Mapped["Asset"] = relationship("Asset", back_populates="telemetry_events")
+
+    __table_args__ = (
+        Index(
+            "ix_telemetry_dedup",
+            "organization_id",
+            "source",
+            "source_event_id",
+            unique=True,
+            postgresql_where="source_event_id IS NOT NULL",
+        ),
+    )

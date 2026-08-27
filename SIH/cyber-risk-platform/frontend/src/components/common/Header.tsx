@@ -36,6 +36,7 @@ export function Header({ backendStatus }: HeaderProps) {
           <nav className="hidden md:flex items-center gap-6">
             <a href="/" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Dashboard</a>
             <a href="/assets" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Asset Inventory</a>
+            <a href="/telemetry" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Security Telemetry</a>
           </nav>
         </div>
 

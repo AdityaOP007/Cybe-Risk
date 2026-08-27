@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/common/Header';
 import { useBackendStatus } from './hooks/useBackendStatus';
+import { DashboardLayout } from './layouts/DashboardLayout';
 import { Assets } from './pages/Assets';
 import { AssetDetails } from './pages/AssetDetails';
+import { Telemetry } from './pages/Telemetry';
 
 function Dashboard() {
   const backendStatus = useBackendStatus();
@@ -101,6 +103,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/assets" element={<Assets />} />
           <Route path="/assets/:id" element={<AssetDetails />} />
+          <Route path="/telemetry" element={<Telemetry />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
