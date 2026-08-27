@@ -7,39 +7,53 @@ import { AssetDetails } from './pages/AssetDetails';
 import { Telemetry } from './pages/Telemetry';
 import { ThreatIntelligence } from './pages/ThreatIntelligence';
 
+import React, { useState, useEffect } from 'react';
+import { riskService } from './services/riskService';
+import api from './services/api';
+import type { RiskTrendResponse } from './types/risk';
+import { RiskScoreMeter } from './components/risk/RiskScoreMeter';
+import { Activity } from 'lucide-react';
+
 function Dashboard() {
   const backendStatus = useBackendStatus();
-  return (
-    <main className="flex flex-1 items-center justify-center px-6 mt-16">
-      <div className="text-center">
-        {/* Hero section */}
-        <div className="mb-8">
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-2xl shadow-indigo-500/30">
-            <svg
-              className="h-10 w-10 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
-              />
-            </svg>
-          </div>
-          <h2 className="mb-3 text-4xl font-bold tracking-tight text-white">
-            Cyber Risk Platform
-          </h2>
-          <p className="mx-auto max-w-lg text-lg text-slate-400">
-            AI-powered cyber risk quantification and decision intelligence
-            for modern enterprises.
-          </p>
-        </div>
+  const [orgRisk, setOrgRisk] = useState<RiskTrendResponse | null>(null);
 
+  useEffect(() => {
+    const fetchOrgRisk = async () => {
+      try {
+        const response = await api.get<{ items: { id: string }[] }>('/api/v1/organizations/');
+        if (response.items && response.items.length > 0) {
+          const orgId = response.items[0].id;
+          const risk = await riskService.getOrganizationRiskTrend(orgId);
+          setOrgRisk(risk);
+        }
+      } catch (err) {
+        console.error('Failed to fetch organizational risk', err);
+      }
+    };
+    if (backendStatus === 'connected') {
+      fetchOrgRisk();
+    }
+  }, [backendStatus]);
+
+  return (
+    <main className="flex flex-1 flex-col items-center justify-start px-6 mt-12 w-full max-w-7xl mx-auto">
+      <div className="text-center mb-12">
+        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-2xl shadow-indigo-500/30">
+          <Activity className="h-10 w-10 text-white" />
+        </div>
+        <h2 className="mb-3 text-4xl font-bold tracking-tight text-white">
+          Cyber Risk Platform
+        </h2>
+        <p className="mx-auto max-w-lg text-lg text-slate-400">
+          AI-powered cyber risk quantification and decision intelligence
+          for modern enterprises.
+        </p>
+      </div>
+
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
         {/* Status Card */}
-        <div className="mx-auto max-w-sm rounded-xl border border-slate-700/50 bg-slate-900/60 p-6 shadow-xl backdrop-blur-sm">
+        <div className="rounded-xl border border-slate-700/50 bg-slate-900/60 p-6 shadow-xl backdrop-blur-sm">
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-400">
             System Status
           </h3>
@@ -83,11 +97,33 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* Module info */}
-        <p className="mt-8 text-xs text-slate-500">
-          Module 03 — Asset Management & Intelligence
-        </p>
+        {/* Organization Risk Card */}
+        <div className="rounded-xl border border-slate-700/50 bg-slate-900/60 p-6 shadow-xl backdrop-blur-sm flex flex-col items-center justify-center">
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-400 w-full text-left">
+            Organizational Risk Profile
+          </h3>
+          {orgRisk ? (
+            <div className="flex flex-col items-center">
+              <RiskScoreMeter 
+                score={orgRisk.current_score.score} 
+                level={orgRisk.current_score.risk_level} 
+                size="md" 
+              />
+              <p className="mt-4 text-sm text-slate-300 text-center">
+                {orgRisk.current_score.metadata_.explanation}
+              </p>
+            </div>
+          ) : (
+            <div className="text-slate-500 text-sm flex flex-col items-center">
+              <span>Waiting for calculation...</span>
+            </div>
+          )}
+        </div>
       </div>
+      
+      <p className="mt-12 text-xs text-slate-500">
+        Module 06 — Cyber Risk Engine & Risk Quantification
+      </p>
     </main>
   );
 }

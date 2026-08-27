@@ -4,6 +4,11 @@ import { assetService } from '../services/assetService';
 import { Asset, AssetPosture } from '../types/asset';
 import { CriticalityBadge, EnvironmentBadge, ExposureBadge, StatusBadge } from '../components/assets/Badges';
 import { Shield, Activity, Server, ArrowLeft, RefreshCw, AlertTriangle, ShieldAlert } from 'lucide-react';
+import { riskService } from '../services/riskService';
+import type { RiskTrendResponse } from '../types/risk';
+import { RiskScoreMeter } from '../components/risk/RiskScoreMeter';
+import { RiskDriversList } from '../components/risk/RiskDriversList';
+import { RiskTrendChart } from '../components/risk/RiskTrendChart';
 
 export const AssetDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,6 +16,7 @@ export const AssetDetails: React.FC = () => {
   const [posture, setPosture] = useState<AssetPosture | null>(null);
   const [vulnerabilities, setVulnerabilities] = useState<any[]>([]);
   const [telemetry, setTelemetry] = useState<any[]>([]);
+  const [riskTrend, setRiskTrend] = useState<RiskTrendResponse | null>(null);
   
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,17 +27,19 @@ export const AssetDetails: React.FC = () => {
     
     try {
       setLoading(true);
-      const [assetData, postureData, vulnsData, telemetryData] = await Promise.all([
+      const [assetData, postureData, vulnsData, telemetryData, riskData] = await Promise.all([
         assetService.getAsset(id),
         assetService.getAssetPosture(id).catch(() => null), // If posture fails, don't crash whole page
         assetService.getAssetVulnerabilities(id),
-        assetService.getAssetTelemetry(id)
+        assetService.getAssetTelemetry(id),
+        riskService.getAssetRiskTrend(id).catch(() => null)
       ]);
       
       setAsset(assetData);
       if (postureData) setPosture(postureData);
       setVulnerabilities(vulnsData);
       setTelemetry(telemetryData);
+      if (riskData) setRiskTrend(riskData);
       setError(null);
     } catch (err: any) {
       setError(err.message || 'Failed to fetch asset details.');
@@ -295,12 +303,41 @@ export const AssetDetails: React.FC = () => {
         )}
 
         {activeTab === 'risk' && (
-          <div className="p-12 text-center">
-            <Shield className="mx-auto h-12 w-12 text-slate-600 mb-4" />
-            <h3 className="text-lg font-medium text-white">Risk analysis not available yet.</h3>
-            <p className="mt-2 text-sm text-slate-400">
-              Risk Engine will populate this section in future modules.
-            </p>
+          <div className="p-6 space-y-6 bg-slate-950">
+            {riskTrend ? (
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Left Column: Meter and Summary */}
+                  <div className="col-span-1 space-y-6">
+                    <div className="bg-slate-900/50 border border-slate-700/50 rounded-xl p-6 flex flex-col items-center justify-center">
+                      <h3 className="text-lg font-medium text-white mb-6 w-full text-left">Current Risk Score</h3>
+                      <RiskScoreMeter 
+                        score={riskTrend.current_score.score} 
+                        level={riskTrend.current_score.risk_level} 
+                        size="lg" 
+                      />
+                      <p className="mt-6 text-sm text-slate-400 text-center">
+                        Last calculated: {new Date(riskTrend.current_score.calculated_at).toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Right Column: Chart and Drivers */}
+                  <div className="col-span-1 md:col-span-2 space-y-6">
+                    <RiskDriversList score={riskTrend.current_score} />
+                    <RiskTrendChart trend={riskTrend.historical_trend} />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="p-12 text-center">
+                <Shield className="mx-auto h-12 w-12 text-slate-600 mb-4" />
+                <h3 className="text-lg font-medium text-white">Risk analysis not available.</h3>
+                <p className="mt-2 text-sm text-slate-400">
+                  Risk Engine has not calculated a score for this asset yet.
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>

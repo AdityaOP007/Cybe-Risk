@@ -9,6 +9,10 @@ from app.schemas.recommendation import RecommendationRead
 from app.schemas.investment import SecurityInvestmentRead
 from app.schemas.simulation import SimulationRead
 from app.schemas.compliance import ComplianceFrameworkRead, ComplianceControlRead, ControlAssessmentRead
+from app.schemas.risk import (
+    RiskFactors, RiskMetadata, RiskScoreBase, RiskScoreCreate, RiskScoreRead,
+    RiskTrendDataPoint, RiskTrendResponse
+)
 from app.schemas.threat_intel import (
     ThreatIndicatorBase, ThreatIndicatorCreate, ThreatIndicatorResponse,
     ThreatIntelligenceRecordBase, ThreatIntelligenceRecordCreate, ThreatIntelligenceRecordResponse,
