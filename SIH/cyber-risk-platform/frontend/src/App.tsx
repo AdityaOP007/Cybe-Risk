@@ -7,6 +7,7 @@ import { AssetDetails } from './pages/AssetDetails';
 import { Telemetry } from './pages/Telemetry';
 import { ThreatIntelligence } from './pages/ThreatIntelligence';
 import { FinancialRisk } from './pages/FinancialRisk';
+import { RiskPrediction } from './pages/RiskPrediction';
 
 import React, { useState, useEffect } from 'react';
 import { riskService } from './services/riskService';
@@ -144,6 +145,7 @@ function App() {
           <Route path="/telemetry" element={<Telemetry />} />
           <Route path="/threat-intel" element={<ThreatIntelligence />} />
           <Route path="/financial-risk" element={<FinancialRisk />} />
+          <Route path="/risk-prediction" element={<RiskPrediction />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

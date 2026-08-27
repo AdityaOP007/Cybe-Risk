@@ -31,4 +31,8 @@ __all__ = [
     "ThreatCorrelation",
     "FinancialAssumption",
     "FinancialRiskAssessment",
+    "RiskPrediction",
+    "RiskPredictionModel",
 ]
+
+from app.models.prediction import RiskPrediction, RiskPredictionModel

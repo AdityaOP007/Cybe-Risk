@@ -19,3 +19,7 @@ httpx==0.28.1
 # Linting & Formatting
 ruff==0.11.13
 black==25.1.0
+
+# Machine Learning
+pandas==2.2.3
+scikit-learn==1.6.1

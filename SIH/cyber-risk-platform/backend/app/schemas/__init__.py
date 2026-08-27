@@ -46,6 +46,13 @@ __all__ = [
     "FinancialBreakdown",
     "FinancialRiskAssessmentRead",
     "OrganizationFinancialRiskSummary",
+    "RiskPredictionRead",
+    "RiskPredictionCreate",
+    "AssetRiskForecastResponse",
+    "OrganizationRiskForecastResponse",
+    "PredictionDriver",
+    "PredictionBulkResult",
+    "RiskPredictionModelRead"
 ]
 from app.schemas.financial_risk import (
     FinancialAssumptionCreate,
@@ -54,4 +61,13 @@ from app.schemas.financial_risk import (
     FinancialBreakdown,
     FinancialRiskAssessmentRead,
     OrganizationFinancialRiskSummary
+)
+from app.schemas.prediction import (
+    RiskPredictionRead,
+    RiskPredictionCreate,
+    AssetRiskForecastResponse,
+    OrganizationRiskForecastResponse,
+    PredictionDriver,
+    PredictionBulkResult,
+    RiskPredictionModelRead
 )
