@@ -41,6 +41,7 @@ export function Header({ backendStatus }: HeaderProps) {
             <a href="/financial-risk" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Financial Risk</a>
             <a href="/risk-prediction" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Risk Forecast</a>
             <a href="/recommendations" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Mitigations</a>
+            <a href="/optimization" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">Budget Optimization</a>
           </nav>
         </div>
 

@@ -9,6 +9,11 @@ from app.schemas.recommendation import RecommendationRead, RecommendationCreate,
 from app.schemas.investment import SecurityInvestmentRead
 from app.schemas.simulation import SimulationRead
 from app.schemas.compliance import ComplianceFrameworkRead, ComplianceControlRead, ControlAssessmentRead
+from app.schemas.optimization import (
+    CybersecurityInvestmentRead, CybersecurityInvestmentCreate,
+    OptimizationRunRead, OptimizationRunRequest,
+    OptimizationPortfolioRead, RiskScenarioRead, RiskScenarioCreate
+)
 from app.schemas.risk import (
     RiskFactors, RiskMetadata, RiskScoreBase, RiskScoreCreate, RiskScoreRead,
     RiskTrendDataPoint, RiskTrendResponse
@@ -39,6 +44,11 @@ __all__ = [
     "RecommendationMetadata",
     "RecommendationEvidence",
     "SecurityInvestmentRead",
+    "OptimizationRunRead",
+    "OptimizationRunRequest",
+    "OptimizationPortfolioRead",
+    "RiskScenarioRead",
+    "RiskScenarioCreate",
     "SimulationRead",
     "ComplianceFrameworkRead",
     "ComplianceControlRead",

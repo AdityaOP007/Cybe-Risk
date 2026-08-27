@@ -6,8 +6,7 @@ from app.models.threat import Threat
 from app.models.control import SecurityControl
 from app.models.risk import RiskScore
 from app.models.recommendation import Recommendation
-from app.models.investment import SecurityInvestment
-from app.models.simulation import Simulation
+from app.models.optimization import CybersecurityInvestment, OptimizationRun, OptimizationPortfolio, RiskScenario
 from app.models.compliance import ComplianceFramework, ComplianceControl, ControlAssessment
 from app.models.threat_intel import ThreatIntelligenceRecord, ThreatIndicator, ThreatCorrelation
 from app.models.financial_risk import FinancialAssumption, FinancialRiskAssessment
@@ -21,8 +20,10 @@ __all__ = [
     "SecurityControl",
     "RiskScore",
     "Recommendation",
-    "SecurityInvestment",
-    "Simulation",
+    "CybersecurityInvestment",
+    "OptimizationRun",
+    "OptimizationPortfolio",
+    "RiskScenario",
     "ComplianceFramework",
     "ComplianceControl",
     "ControlAssessment",

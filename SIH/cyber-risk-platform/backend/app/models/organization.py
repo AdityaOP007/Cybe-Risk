@@ -12,8 +12,6 @@ if TYPE_CHECKING:
     from app.models.control import SecurityControl
     from app.models.risk import RiskScore
     from app.models.recommendation import Recommendation
-    from app.models.investment import SecurityInvestment
-    from app.models.simulation import Simulation
     from app.models.compliance import ControlAssessment
 
 
@@ -47,12 +45,6 @@ class Organization(Base, UUIDMixin, TimestampMixin):
     )
     recommendations: Mapped[list["Recommendation"]] = relationship(
         "Recommendation", back_populates="organization", cascade="all, delete-orphan"
-    )
-    investments: Mapped[list["SecurityInvestment"]] = relationship(
-        "SecurityInvestment", back_populates="organization", cascade="all, delete-orphan"
-    )
-    simulations: Mapped[list["Simulation"]] = relationship(
-        "Simulation", back_populates="organization", cascade="all, delete-orphan"
     )
     control_assessments: Mapped[list["ControlAssessment"]] = relationship(
         "ControlAssessment", back_populates="organization", cascade="all, delete-orphan"
