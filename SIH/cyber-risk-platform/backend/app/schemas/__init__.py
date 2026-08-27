@@ -39,4 +39,19 @@ __all__ = [
     "ComplianceFrameworkRead",
     "ComplianceControlRead",
     "ControlAssessmentRead",
+    "ControlAssessmentRead",
+    "FinancialAssumptionCreate",
+    "FinancialAssumptionRead",
+    "FinancialAssumptionUpdate",
+    "FinancialBreakdown",
+    "FinancialRiskAssessmentRead",
+    "OrganizationFinancialRiskSummary",
 ]
+from app.schemas.financial_risk import (
+    FinancialAssumptionCreate,
+    FinancialAssumptionRead,
+    FinancialAssumptionUpdate,
+    FinancialBreakdown,
+    FinancialRiskAssessmentRead,
+    OrganizationFinancialRiskSummary
+)

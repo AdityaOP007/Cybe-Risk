@@ -10,6 +10,7 @@ from app.models.investment import SecurityInvestment
 from app.models.simulation import Simulation
 from app.models.compliance import ComplianceFramework, ComplianceControl, ControlAssessment
 from app.models.threat_intel import ThreatIntelligenceRecord, ThreatIndicator, ThreatCorrelation
+from app.models.financial_risk import FinancialAssumption, FinancialRiskAssessment
 
 __all__ = [
     "Organization",
@@ -28,4 +29,6 @@ __all__ = [
     "ThreatIntelligenceRecord",
     "ThreatIndicator",
     "ThreatCorrelation",
+    "FinancialAssumption",
+    "FinancialRiskAssessment",
 ]
