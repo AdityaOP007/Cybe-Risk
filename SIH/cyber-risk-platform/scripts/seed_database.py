@@ -10,12 +10,13 @@ from app.models.asset import Asset
 from app.models.vulnerability import Vulnerability
 from app.models.telemetry import TelemetryEvent
 from app.models.threat import Threat
+from app.models.threat_intel import ThreatIntelligenceRecord, ThreatIndicator, ThreatCorrelation
 from app.models.control import SecurityControl
 from app.models.risk import RiskScore
 from app.models.recommendation import Recommendation
-from app.models.investment import SecurityInvestment
-from app.models.simulation import Simulation
-from app.models.compliance import ComplianceFramework, ComplianceControl, ControlAssessment
+from app.models.optimization import OptimizationRun, OptimizationPortfolio, CybersecurityInvestment
+
+from app.models.compliance import ComplianceFramework, ComplianceRequirement, ComplianceAssessment
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -113,19 +114,19 @@ def seed_data():
 
         logger.info("Seeding investments...")
         investments = [
-            SecurityInvestment(organization_id=org.id, name="Implement Zero Trust Architecture", category="network", cost=150000.0, expected_risk_reduction=30.0, status="proposed"),
+            CybersecurityInvestment(organization_id=org.id, title="Implement Zero Trust Architecture", category="network", cost=150000.0, risk_reduction=30.0, status="candidate"),
         ]
         session.add_all(investments)
         
         logger.info("Seeding compliance...")
-        framework = ComplianceFramework(name="NIST CSF 2.0", version="2.0", description="National Institute of Standards and Technology Cybersecurity Framework")
+        framework = ComplianceFramework(name="NIST CSF 2.0", version="2.0")
         session.add(framework)
         session.commit()
         session.refresh(framework)
         
         comp_controls = [
-            ComplianceControl(framework_id=framework.id, control_id="ID.AM-01", title="Inventories of hardware", category="Identify"),
-            ComplianceControl(framework_id=framework.id, control_id="PR.AC-01", title="Identity management", category="Protect"),
+            ComplianceRequirement(framework_id=framework.id, requirement_id="ID.AM-01", title="Inventories of hardware", category="Identify"),
+            ComplianceRequirement(framework_id=framework.id, requirement_id="PR.AC-01", title="Identity management", category="Protect"),
         ]
         session.add_all(comp_controls)
         session.commit()

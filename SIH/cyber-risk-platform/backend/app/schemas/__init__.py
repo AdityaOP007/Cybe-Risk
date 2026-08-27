@@ -13,6 +13,7 @@ from app.schemas.compliance import (
     ComplianceControlMappingRead, ComplianceEvidenceRead, ComplianceAssessmentRead,
     ComplianceGapRead, ComplianceExceptionRead, FrameworkAssessmentSummary
 )
+from app.schemas.dashboard import *
 from app.schemas.optimization import (
     CybersecurityInvestmentRead, CybersecurityInvestmentCreate,
     OptimizationRunRead, OptimizationRunRequest,
@@ -75,7 +76,21 @@ __all__ = [
     "OrganizationRiskForecastResponse",
     "PredictionDriver",
     "PredictionBulkResult",
-    "RiskPredictionModelRead"
+    "RiskPredictionModelRead",
+    "RiskSummary",
+    "FinancialSummary",
+    "PredictionSummary",
+    "AssetRiskSummary",
+    "TopRiskDrivers",
+    "ThreatSummary",
+    "VulnerabilitySummary",
+    "RecommendationSummary",
+    "BudgetSummary",
+    "ComplianceSummary",
+    "DashboardAlertRead",
+    "ExecutiveInsightRead",
+    "DataQuality",
+    "ExecutiveDashboardData"
 ]
 from app.schemas.financial_risk import (
     FinancialAssumptionCreate,

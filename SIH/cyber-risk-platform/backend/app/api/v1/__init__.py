@@ -15,6 +15,7 @@ from app.api.v1 import predictions
 from app.api.v1 import recommendations
 from app.api.v1 import optimization
 from app.api.v1 import compliance
+from app.api.v1 import dashboard
 
 api_router = APIRouter()
 
@@ -31,3 +32,4 @@ api_router.include_router(predictions.router, prefix="/predictions", tags=["Pred
 api_router.include_router(recommendations.router, prefix="/recommendations", tags=["Recommendations"])
 api_router.include_router(optimization.router, prefix="/optimization", tags=["Optimization"])
 api_router.include_router(compliance.router, prefix="/compliance", tags=["Compliance"])
+api_router.include_router(dashboard.router, prefix="/dashboard", tags=["Dashboard"])

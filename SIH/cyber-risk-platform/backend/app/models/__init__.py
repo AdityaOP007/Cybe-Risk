@@ -19,6 +19,7 @@ from app.models.compliance import (
 )
 from app.models.threat_intel import ThreatIntelligenceRecord, ThreatIndicator, ThreatCorrelation
 from app.models.financial_risk import FinancialAssumption, FinancialRiskAssessment
+from app.models.dashboard import DashboardAlert, ExecutiveInsight
 
 __all__ = [
     "Organization",
@@ -48,6 +49,8 @@ __all__ = [
     "FinancialRiskAssessment",
     "RiskPrediction",
     "RiskPredictionModel",
+    "DashboardAlert",
+    "ExecutiveInsight",
 ]
 
 from app.models.prediction import RiskPrediction, RiskPredictionModel

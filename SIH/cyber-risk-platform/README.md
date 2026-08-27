@@ -2,6 +2,8 @@
 
 **AI-Powered Cyber Risk Quantification & Decision Intelligence Platform**
 
+- [x] **Module 12 — Executive Cyber Risk & Decision Intelligence Dashboard**
+
 An enterprise platform that continuously quantifies cyber risk in financial terms by combining security telemetry, asset criticality, vulnerabilities, threat intelligence, AI/ML prediction, and compliance mapping for NIST, ISO 27001, RBI, and SEBI.
 
 ## Current Status
