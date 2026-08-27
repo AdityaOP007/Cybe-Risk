@@ -1,0 +1,77 @@
+# ========================
+# Python
+# ========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage/
+htmlcov/
+*.cover
+
+# ========================
+# Node / Frontend
+# ========================
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+.eslintcache
+
+# ========================
+# Environment & Secrets
+# ========================
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# ========================
+# Docker
+# ========================
+docker-compose.override.yml
+*.log
+
+# ========================
+# IDE
+# ========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# ========================
+# OS Generated
+# ========================
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# ========================
+# Alembic
+# ========================
+# Keep versions tracked, but ignore temp files
+*.pyc
+
+# ========================
+# Misc
+# ========================
+*.bak
+*.tmp
+*.temp
