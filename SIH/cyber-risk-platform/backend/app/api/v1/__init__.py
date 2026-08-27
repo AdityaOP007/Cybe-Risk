@@ -12,6 +12,7 @@ from app.api.v1 import threat_intel
 from app.api.v1 import risk
 from app.api.v1 import financial_risk
 from app.api.v1 import predictions
+from app.api.v1 import recommendations
 
 api_router = APIRouter()
 
@@ -25,3 +26,4 @@ api_router.include_router(threat_intel.router, tags=["Threat Intelligence"])
 api_router.include_router(risk.router)
 api_router.include_router(financial_risk.router)
 api_router.include_router(predictions.router, prefix="/predictions", tags=["Predictions"])
+api_router.include_router(recommendations.router, prefix="/recommendations", tags=["Recommendations"])
