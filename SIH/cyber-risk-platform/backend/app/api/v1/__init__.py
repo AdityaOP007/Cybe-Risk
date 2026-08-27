@@ -2,7 +2,16 @@
 
 from fastapi import APIRouter
 
-from app.api.v1.health import router as health_router
+from app.api.v1 import health
+from app.api.v1 import organizations
+from app.api.v1 import assets
+from app.api.v1 import vulnerabilities
+from app.api.v1 import controls
 
-router = APIRouter()
-router.include_router(health_router, tags=["Health"])
+api_router = APIRouter()
+
+api_router.include_router(health.router, prefix="/health", tags=["Health"])
+api_router.include_router(organizations.router, prefix="/organizations", tags=["Organizations"])
+api_router.include_router(assets.router, prefix="/assets", tags=["Assets"])
+api_router.include_router(vulnerabilities.router, prefix="/vulnerabilities", tags=["Vulnerabilities"])
+api_router.include_router(controls.router, prefix="/controls", tags=["Security Controls"])
