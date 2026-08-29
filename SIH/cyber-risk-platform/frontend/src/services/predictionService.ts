@@ -1,31 +1,27 @@
 import api from './api';
-import {
+import type { 
   AssetRiskForecastResponse,
   PredictionBulkResult,
   PredictionModel
-} from '../types/prediction';
+ } from "../types/prediction";
 
-const API_PREFIX = '/predictions';
+const API_PREFIX = '/api/v1/predictions';
 
 export const predictionService = {
   calculateAssetPrediction: async (assetId: string): Promise<AssetRiskForecastResponse> => {
-    const response = await api.post(`${API_PREFIX}/assets/${assetId}/calculate`);
-    return response.data;
+    return api.post<AssetRiskForecastResponse>(`${API_PREFIX}/assets/${assetId}/calculate`);
   },
 
   getAssetPrediction: async (assetId: string): Promise<AssetRiskForecastResponse> => {
-    const response = await api.get(`${API_PREFIX}/assets/${assetId}`);
-    return response.data;
+    return api.get<AssetRiskForecastResponse>(`${API_PREFIX}/assets/${assetId}`);
   },
 
   calculateAllPredictions: async (organizationId: string): Promise<PredictionBulkResult> => {
-    const response = await api.post(`${API_PREFIX}/organizations/${organizationId}/calculate-all`);
-    return response.data;
+    return api.post<PredictionBulkResult>(`${API_PREFIX}/organizations/${organizationId}/calculate-all`);
   },
 
   getModels: async (): Promise<PredictionModel[]> => {
-    const response = await api.get(`${API_PREFIX}/models`);
-    return response.data;
+    return api.get<PredictionModel[]>(`${API_PREFIX}/models`);
   }
 };
 

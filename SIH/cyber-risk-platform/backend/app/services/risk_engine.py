@@ -194,7 +194,7 @@ class RiskEngine:
             score=round(net_risk, 2),
             risk_level=level,
             calculation_version="v1.0",
-            metadata_=metadata
+            risk_metadata=metadata
         )
         
         self.db.add(risk_record)
@@ -217,10 +217,10 @@ class RiskEngine:
                 score=0,
                 risk_level="informational",
                 calculation_version="v1.0",
-                metadata_={
+                risk_metadata={
                     "drivers": ["No assets found in organization"],
                     "explanation": "Organizational risk is 0 because there are no assets.",
-                    "confidence": 100
+                    "confidence": 100.0
                 }
             )
             self.db.add(risk_record)
@@ -288,7 +288,7 @@ class RiskEngine:
             score=round(org_score, 2),
             risk_level=level,
             calculation_version="v1.0",
-            metadata_=metadata
+            risk_metadata=metadata
         )
         
         self.db.add(risk_record)

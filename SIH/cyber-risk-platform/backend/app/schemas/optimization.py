@@ -65,7 +65,7 @@ class OptimizationPortfolioRead(BaseModel):
     total_cost: float
     risk_reduction: Optional[float] = None
     financial_reduction: Optional[float] = None
-    metadata_: Optional[dict[str, Any]] = Field(None, alias="metadata")
+    portfolio_metadata: Optional[dict[str, Any]] = None
     created_at: datetime
     updated_at: datetime
 

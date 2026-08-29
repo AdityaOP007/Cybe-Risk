@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { assetService } from '../services/assetService';
-import { Asset, AssetPosture } from '../types/asset';
+import type {  Asset, AssetPosture  } from "../types/asset";
 import { CriticalityBadge, EnvironmentBadge, ExposureBadge, StatusBadge } from '../components/assets/Badges';
 import { Shield, Activity, Server, ArrowLeft, RefreshCw, AlertTriangle, ShieldAlert } from 'lucide-react';
 import { riskService } from '../services/riskService';

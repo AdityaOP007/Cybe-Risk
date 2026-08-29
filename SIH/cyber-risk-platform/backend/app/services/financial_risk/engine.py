@@ -116,9 +116,9 @@ class FinancialRiskEngine:
         else:
             # Derive from module 6 likelihood
             likelihood_factor = 0.5 # default moderate
-            if latest_risk.metadata_ and "factors" in latest_risk.metadata_:
+            if latest_risk.risk_metadata and "factors" in latest_risk.risk_metadata:
                 # Likelihood is 0-100 in Module 6
-                likelihood_factor = latest_risk.metadata_["factors"].get("likelihood", 50) / 100.0
+                likelihood_factor = latest_risk.risk_metadata["factors"].get("likelihood", 50) / 100.0
             
             # Map likelihood (0.0 - 1.0) to an annualized frequency (e.g., 0.1 = 1 in 10 years, 0.9 = nearly 1 a year)
             annual_event_frequency = likelihood_factor
@@ -130,9 +130,9 @@ class FinancialRiskEngine:
 
         # Adjust Confidence
         final_confidence = max(0, confidence - missing_data_penalties)
-        if "confidence" in latest_risk.metadata_:
+        if latest_risk and latest_risk.risk_metadata and "confidence" in latest_risk.risk_metadata:
             # Blend with cyber risk confidence
-            cyber_conf = latest_risk.metadata_.get("confidence", 100)
+            cyber_conf = latest_risk.risk_metadata.get("confidence", 100)
             final_confidence = (final_confidence + cyber_conf) / 2.0
 
         explanation = f"Asset '{asset.name}' has a modeled Potential Loss of ₹{potential_loss:,.0f}. "
@@ -164,7 +164,7 @@ class FinancialRiskEngine:
             data_completeness=100.0 - missing_data_penalties, # Rough completeness metric
             calculation_version="v1.0",
             assumptions_snapshot=assumptions_snapshot,
-            metadata_=metadata
+            financial_metadata=metadata
         )
 
         self.db.add(record)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Activity, TrendingUp, TrendingDown, AlertTriangle, Shield, CheckCircle2, ChevronRight, Clock, Target } from 'lucide-react';
 import { predictionService } from '../services/predictionService';
 import api from '../services/api';

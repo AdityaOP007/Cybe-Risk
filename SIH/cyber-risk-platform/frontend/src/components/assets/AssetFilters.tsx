@@ -1,5 +1,5 @@
 import React from 'react';
-import { AssetFilters as FilterType } from '../../types/asset';
+import type {  AssetFilters as FilterType  } from "../../types/asset";
 
 interface AssetFiltersProps {
   filters: FilterType;

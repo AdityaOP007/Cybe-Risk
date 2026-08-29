@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { assetService } from '../services/assetService';
 import api from '../services/api';
-import { Asset, AssetFilters as FilterType, AssetCreateRequest, PaginatedAssets } from '../types/asset';
+import type {  AssetFilters as FilterType, AssetCreateRequest, PaginatedAssets  } from "../types/asset";
 import { AssetTable } from '../components/assets/AssetTable';
 import { AssetSearch } from '../components/assets/AssetSearch';
 import { AssetFilters } from '../components/assets/AssetFilters';

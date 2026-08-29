@@ -1,32 +1,27 @@
 import api from './api';
-import { 
+import type {  
   ComplianceFramework, 
   FrameworkAssessmentSummary, 
   ComplianceGap, 
   CrosswalkResponse 
-} from '../types/compliance';
+ } from "../types/compliance";
 
 export const getFrameworks = async (): Promise<ComplianceFramework[]> => {
-  const response = await api.get('/compliance/frameworks');
-  return response.data;
+  return api.get<ComplianceFramework[]>('/api/v1/compliance/frameworks');
 };
 
 export const getFrameworkSummary = async (frameworkId: string): Promise<FrameworkAssessmentSummary> => {
-  const response = await api.get(`/compliance/frameworks/${frameworkId}/summary`);
-  return response.data;
+  return api.get<FrameworkAssessmentSummary>(`/api/v1/compliance/frameworks/${frameworkId}/summary`);
 };
 
 export const assessFramework = async (frameworkId: string): Promise<FrameworkAssessmentSummary> => {
-  const response = await api.post(`/compliance/frameworks/${frameworkId}/assess`);
-  return response.data;
+  return api.post<FrameworkAssessmentSummary>(`/api/v1/compliance/frameworks/${frameworkId}/assess`);
 };
 
 export const getGaps = async (): Promise<ComplianceGap[]> => {
-  const response = await api.get('/compliance/gaps');
-  return response.data;
+  return api.get<ComplianceGap[]>('/api/v1/compliance/gaps');
 };
 
 export const getControlCrosswalk = async (controlId: string): Promise<CrosswalkResponse> => {
-  const response = await api.get(`/compliance/crosswalk/control/${controlId}`);
-  return response.data;
+  return api.get<CrosswalkResponse>(`/api/v1/compliance/crosswalk/control/${controlId}`);
 };

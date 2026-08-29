@@ -52,7 +52,7 @@ class RecommendationEngine:
                     expected_risk_reduction=c.get("expected_risk_reduction"),
                     status="proposed",
                     generated_at=datetime.now(timezone.utc),
-                    metadata_=c["metadata"].model_dump()
+                    rec_metadata=c["metadata"].model_dump()
                 )
                 self.db.add(rec)
                 new_recommendations.append(rec)
@@ -81,10 +81,15 @@ class RecommendationEngine:
             return []
             
         threats = []
-        if asset.operating_system:
-            # Look for threats targeting this OS
-            records = self.db.scalars(select(ThreatIntelligenceRecord).where(ThreatIntelligenceRecord.target_systems.contains([asset.operating_system]))).all()
-            threats.extend(records)
+        from app.models.threat_intel import ThreatCorrelation, ThreatIntelligenceRecord
+        
+        # Look for threats correlated with this asset
+        records = self.db.scalars(
+            select(ThreatIntelligenceRecord)
+            .join(ThreatCorrelation, ThreatCorrelation.threat_record_id == ThreatIntelligenceRecord.id)
+            .where(ThreatCorrelation.asset_id == asset_id)
+        ).all()
+        threats.extend(records)
             
         # Fallback to general active threats if no specific TI records
         if not threats:
@@ -212,7 +217,7 @@ class RecommendationEngine:
         
         def get_sort_key(r: Recommendation):
             p_score = priority_map.get(r.priority, 0)
-            fin = r.metadata_.get("expected_financial_benefit", 0.0) if r.metadata_ else 0.0
+            fin = r.rec_metadata.get("expected_financial_benefit", 0.0) if r.rec_metadata else 0.0
             return (p_score, fin)
             
         return sorted(recs, key=get_sort_key, reverse=True)

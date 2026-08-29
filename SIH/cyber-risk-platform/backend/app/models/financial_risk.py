@@ -98,7 +98,7 @@ class FinancialRiskAssessment(Base, UUIDMixin):
     calculation_version: Mapped[str] = mapped_column(String(50), nullable=False)
     
     assumptions_snapshot: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
-    metadata_: Mapped[dict[str, Any] | None] = mapped_column("metadata", JSONB, nullable=True)
+    financial_metadata: Mapped[dict[str, Any] | None] = mapped_column("metadata", JSONB, nullable=True)
     
     calculated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), index=True, default=get_utc_now, nullable=False

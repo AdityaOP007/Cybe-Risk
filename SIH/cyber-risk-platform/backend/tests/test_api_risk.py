@@ -42,8 +42,8 @@ def test_risk_calculation(client: TestClient, db_session: Session):
     base_score = data["score"]
     
     # Assert impact is calculated correctly
-    assert data["metadata"]["factors"]["impact"] > 0
-    assert "Asset is internet exposed" in data["metadata"]["drivers"]
+    assert data["risk_metadata"]["factors"]["impact"] > 0
+    assert "Asset is internet exposed" in data["risk_metadata"]["drivers"]
 
     # 2. Add Vulnerability to increase likelihood
     vuln = Vulnerability(
@@ -60,7 +60,7 @@ def test_risk_calculation(client: TestClient, db_session: Session):
     data = response.json()
     vuln_score = data["score"]
     assert vuln_score > base_score # Risk should go up
-    assert data["metadata"]["factors"]["likelihood"] > 0
+    assert data["risk_metadata"]["factors"]["likelihood"] > 0
 
     # 3. Add Security Control to mitigate risk
     ctrl = SecurityControl(
@@ -79,13 +79,13 @@ def test_risk_calculation(client: TestClient, db_session: Session):
     mitigated_score = data["score"]
     
     assert mitigated_score < vuln_score # Risk should go down due to control
-    assert data["metadata"]["factors"]["mitigation_factor"] == 0.5
+    assert data["risk_metadata"]["factors"]["mitigation_factor"] == 0.5
     
     # 4. Calculate Org Risk
     response = client.post(f"/api/v1/risk/calculate/organization/{org_id}")
     assert response.status_code == 200
     org_data = response.json()
-    assert org_data["metadata"]["factors"]["total_assets"] == 1
+    assert org_data["risk_metadata"]["factors"]["total_assets"] == 1
     assert org_data["score"] == mitigated_score # Only 1 asset, so org risk = asset risk
 
 def test_get_risk_trend(client: TestClient, db_session: Session):

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AssetRiskSummary } from '../../types/dashboard';
+import type {  AssetRiskSummary  } from "../../types/dashboard";
 import { TrendingUp, Minus } from 'lucide-react';
 
 interface TopRiskAssetsProps {

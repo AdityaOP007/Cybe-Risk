@@ -34,7 +34,7 @@ class RiskScore(Base, UUIDMixin):
     risk_level: Mapped[str] = mapped_column(String(50), index=True, nullable=False)
     
     calculation_version: Mapped[str | None] = mapped_column(String(50), nullable=True)
-    metadata_: Mapped[dict[str, Any] | None] = mapped_column("metadata", JSONB, nullable=True)
+    risk_metadata: Mapped[dict[str, Any] | None] = mapped_column("metadata", JSONB, nullable=True)
     
     calculated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), index=True, default=get_utc_now, nullable=False

@@ -227,8 +227,8 @@ class DashboardAggregatorService:
         ).first()
 
         drivers = []
-        if score and score.metadata_:
-            factors = score.metadata_.get("factors", score.metadata_)
+        if score and score.risk_metadata:
+            factors = score.risk_metadata.get("factors", score.risk_metadata)
             if isinstance(factors, dict):
                 for key, val in factors.items():
                     if isinstance(val, (int, float)) and val > 0:
@@ -259,7 +259,7 @@ class DashboardAggregatorService:
                 affected_assets=0,
                 confidence=t.confidence or 0.0,
                 severity=t.severity,
-                trend="increasing" if t.status == "active" else "stable"
+                trend="increasing" if t.known_exploited else "stable"
             ))
         return results
 

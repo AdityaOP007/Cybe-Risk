@@ -75,7 +75,7 @@ class FinancialRiskAssessmentBase(BaseModel):
     calculation_version: str
     
     assumptions_snapshot: Optional[Dict[str, Any]] = None
-    metadata: Optional[Dict[str, Any]] = Field(None, validation_alias="metadata_")
+    financial_metadata: Optional[Dict[str, Any]] = None
 
 class FinancialRiskAssessmentRead(FinancialRiskAssessmentBase):
     id: UUID

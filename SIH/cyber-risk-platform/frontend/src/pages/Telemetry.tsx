@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Activity, RefreshCw, Filter, Search } from 'lucide-react';
+import { Activity, RefreshCw, Search } from 'lucide-react';
 import { telemetryService } from '../services/telemetryService';
 import type { TelemetryEvent, TelemetryStats, TelemetryEventFilters } from '../types/telemetry';
 import { TelemetryTable } from '../components/telemetry/TelemetryTable';
 import { TelemetryDetailDrawer } from '../components/telemetry/TelemetryDetailDrawer';
-import { api } from '../services/api';
+import api from "../services/api";
 
 export const Telemetry: React.FC = () => {
   const [events, setEvents] = useState<TelemetryEvent[]>([]);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExecutiveInsight } from '../../types/dashboard';
+import type {  ExecutiveInsight  } from "../../types/dashboard";
 import { Lightbulb } from 'lucide-react';
 
 interface ExecutiveSummaryProps {

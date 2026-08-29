@@ -1,6 +1,6 @@
 import React from 'react';
-import { DashboardAlert } from '../../types/dashboard';
-import { Bell, Check, X, ShieldAlert } from 'lucide-react';
+import type {  DashboardAlert  } from "../../types/dashboard";
+import { Bell, Check, ShieldAlert } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
 interface ExecutiveAlertsProps {

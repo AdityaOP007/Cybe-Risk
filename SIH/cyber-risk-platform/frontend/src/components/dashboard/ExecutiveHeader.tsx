@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { Activity, RefreshCw } from 'lucide-react';
-import { DataQuality } from '../../types/dashboard';
+import type {  DataQuality  } from "../../types/dashboard";
 
 interface ExecutiveHeaderProps {
   organizationName: string;

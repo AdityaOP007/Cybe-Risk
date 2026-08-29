@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComplianceSummary } from '../../types/dashboard';
+import type {  ComplianceSummary  } from "../../types/dashboard";
 import { ShieldCheck, ShieldAlert, AlertCircle } from 'lucide-react';
 
 interface ComplianceSummaryCardsProps {

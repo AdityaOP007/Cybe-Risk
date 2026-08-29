@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getExecutiveDashboard, acknowledgeAlert } from '../services/dashboardService';
-import { ExecutiveDashboardData } from '../types/dashboard';
+import type {  ExecutiveDashboardData  } from "../types/dashboard";
 import { ExecutiveHeader } from '../components/dashboard/ExecutiveHeader';
 import { ExecutiveSummary } from '../components/dashboard/ExecutiveSummary';
 import { TopKpiCards } from '../components/dashboard/TopKpiCards';

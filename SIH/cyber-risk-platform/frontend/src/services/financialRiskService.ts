@@ -1,49 +1,42 @@
 import api from './api';
-import {
+import type { 
   FinancialRiskAssessment,
   FinancialBreakdown,
   FinancialAssumption,
   OrganizationFinancialRiskSummary
-} from '../types/financialRisk';
+ } from "../types/financialRisk";
 
-const API_PREFIX = '/financial-risk';
+const API_PREFIX = '/api/v1/financial-risk';
 
 export const financialRiskService = {
   // Asset Endpoints
   calculateAssetFinancialRisk: async (assetId: string): Promise<FinancialRiskAssessment> => {
-    const response = await api.post(`${API_PREFIX}/assets/${assetId}/calculate`);
-    return response.data;
+    return api.post<FinancialRiskAssessment>(`${API_PREFIX}/assets/${assetId}/calculate`);
   },
 
   getAssetFinancialRisk: async (assetId: string): Promise<FinancialRiskAssessment> => {
-    const response = await api.get(`${API_PREFIX}/assets/${assetId}`);
-    return response.data;
+    return api.get<FinancialRiskAssessment>(`${API_PREFIX}/assets/${assetId}`);
   },
 
   getAssetFinancialRiskHistory: async (assetId: string): Promise<FinancialRiskAssessment[]> => {
-    const response = await api.get(`${API_PREFIX}/assets/${assetId}/history`);
-    return response.data;
+    return api.get<FinancialRiskAssessment[]>(`${API_PREFIX}/assets/${assetId}/history`);
   },
 
   getAssetFinancialBreakdown: async (assetId: string): Promise<FinancialBreakdown> => {
-    const response = await api.get(`${API_PREFIX}/assets/${assetId}/breakdown`);
-    return response.data;
+    return api.get<FinancialBreakdown>(`${API_PREFIX}/assets/${assetId}/breakdown`);
   },
 
   getAssetAssumptions: async (assetId: string): Promise<FinancialAssumption[]> => {
-    const response = await api.get(`${API_PREFIX}/assets/${assetId}/assumptions`);
-    return response.data;
+    return api.get<FinancialAssumption[]>(`${API_PREFIX}/assets/${assetId}/assumptions`);
   },
 
   // Organization Endpoints
   calculateOrganizationFinancialRisk: async (organizationId: string): Promise<{ status: string; message: string }> => {
-    const response = await api.post(`${API_PREFIX}/organizations/${organizationId}/calculate`);
-    return response.data;
+    return api.post<{ status: string; message: string }>(`${API_PREFIX}/organizations/${organizationId}/calculate`);
   },
 
   getOrganizationFinancialRisk: async (organizationId: string): Promise<OrganizationFinancialRiskSummary> => {
-    const response = await api.get(`${API_PREFIX}/organizations/${organizationId}`);
-    return response.data;
+    return api.get<OrganizationFinancialRiskSummary>(`${API_PREFIX}/organizations/${organizationId}`);
   },
 };
 

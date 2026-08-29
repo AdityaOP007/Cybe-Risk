@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/common/Header';
 import { useBackendStatus } from './hooks/useBackendStatus';
-import { DashboardLayout } from './layouts/DashboardLayout';
 import { Assets } from './pages/Assets';
 import { AssetDetails } from './pages/AssetDetails';
 import { Telemetry } from './pages/Telemetry';
 import { ThreatIntelligence } from './pages/ThreatIntelligence';
-import { FinancialRisk } from './pages/FinancialRisk';
+import FinancialRisk from './pages/FinancialRisk';
 import { RiskPrediction } from './pages/RiskPrediction';
 import { Recommendations } from './pages/Recommendations';
 import { BudgetOptimization } from './pages/BudgetOptimization';

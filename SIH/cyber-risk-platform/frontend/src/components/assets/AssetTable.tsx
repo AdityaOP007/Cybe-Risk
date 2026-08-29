@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Asset } from '../../types/asset';
+import type {  Asset  } from "../../types/asset";
 import { CriticalityBadge, EnvironmentBadge, ExposureBadge, StatusBadge } from './Badges';
-import { Search, Filter, MoreHorizontal, ChevronLeft, ChevronRight, Eye, Edit, Trash } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Eye, Edit, Trash } from 'lucide-react';
 
 interface AssetTableProps {
   assets: Asset[];

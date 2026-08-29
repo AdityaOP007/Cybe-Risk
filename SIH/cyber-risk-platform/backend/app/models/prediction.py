@@ -84,8 +84,8 @@ class RiskPrediction(Base, UUIDMixin):
     # For Backtesting / Performance tracking later
     actual_risk: Mapped[float | None] = mapped_column(Float, nullable=True)
     prediction_error: Mapped[float | None] = mapped_column(Float, nullable=True)
-
-    metadata_: Mapped[dict[str, Any] | None] = mapped_column("metadata", JSONB, nullable=True)
+    
+    prediction_metadata: Mapped[dict[str, Any] | None] = mapped_column("metadata", JSONB, nullable=True)
     
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=get_utc_now, nullable=False)
 

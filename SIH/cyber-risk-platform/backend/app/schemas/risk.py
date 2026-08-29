@@ -21,7 +21,7 @@ class RiskScoreBase(BaseModel):
     score: float = Field(..., ge=0, le=100)
     risk_level: str
     calculation_version: Optional[str] = None
-    metadata: Optional[RiskMetadata] = Field(None, validation_alias="metadata_")
+    risk_metadata: Optional[RiskMetadata] = None
 
 class RiskScoreCreate(RiskScoreBase):
     organization_id: UUID

@@ -28,7 +28,7 @@ class RecommendationBase(BaseModel):
 class RecommendationCreate(RecommendationBase):
     organization_id: uuid.UUID
     asset_id: Optional[uuid.UUID] = None
-    metadata_: Optional[RecommendationMetadata] = Field(None, alias="metadata")
+    rec_metadata: Optional[RecommendationMetadata] = None
 
 class RecommendationUpdate(BaseModel):
     status: Optional[str] = None
@@ -42,7 +42,7 @@ class RecommendationRead(RecommendationBase):
     generated_at: datetime
     accepted_at: Optional[datetime] = None
     completed_at: Optional[datetime] = None
-    metadata_: Optional[RecommendationMetadata] = Field(None, alias="metadata")
+    rec_metadata: Optional[RecommendationMetadata] = None
     created_at: datetime
     updated_at: datetime
 

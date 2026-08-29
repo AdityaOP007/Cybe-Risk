@@ -123,7 +123,7 @@ class OptimizationPortfolio(Base, UUIDMixin, TimestampMixin):
     risk_reduction: Mapped[float | None] = mapped_column(Float, nullable=True)
     financial_reduction: Mapped[float | None] = mapped_column(Float, nullable=True)
     
-    metadata_: Mapped[dict[str, Any] | None] = mapped_column("metadata", JSONB, nullable=True) # e.g. "why selected", "why not selected" lists
+    portfolio_metadata: Mapped[dict[str, Any] | None] = mapped_column("metadata", JSONB, nullable=True) # e.g. "why selected", "why not selected" lists
 
     run: Mapped["OptimizationRun"] = relationship("OptimizationRun", back_populates="portfolios")
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { RecommendationSummary, BudgetSummary } from '../../types/dashboard';
+import type {  RecommendationSummary, BudgetSummary  } from "../../types/dashboard";
 import { CheckCircle, AlertTriangle, ArrowRight, Shield } from 'lucide-react';
 
 interface ActionQueueProps {
@@ -39,7 +39,7 @@ export const ActionQueue: React.FC<ActionQueueProps> = ({ recommendations, budge
           )}
 
           {/* Top Recommendations */}
-          {recommendations.slice(0, 4).map((rec, i) => (
+          {recommendations.slice(0, 4).map((rec) => (
             <div key={rec.recommendation_id} className="bg-slate-800/30 rounded-lg p-4 border border-gray-700/50">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex flex-col gap-1">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BudgetSummary } from '../../types/dashboard';
+import type {  BudgetSummary  } from "../../types/dashboard";
 import { TrendingDown } from 'lucide-react';
 
 interface BudgetImpactChartProps {

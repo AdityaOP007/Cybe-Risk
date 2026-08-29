@@ -41,7 +41,7 @@ class Recommendation(Base, UUIDMixin, TimestampMixin):
     accepted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     
-    metadata_: Mapped[dict[str, Any] | None] = mapped_column("metadata", JSONB, nullable=True)
+    rec_metadata: Mapped[dict[str, Any] | None] = mapped_column("metadata", JSONB, nullable=True)
 
     # Relationships
     organization: Mapped["Organization"] = relationship("Organization", back_populates="recommendations")

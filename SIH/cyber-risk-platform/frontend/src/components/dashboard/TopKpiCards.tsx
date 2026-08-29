@@ -1,9 +1,8 @@
 import React from 'react';
 import { 
   ShieldAlert, ShieldCheck, TrendingUp, TrendingDown, Minus, 
-  DollarSign, Activity, FileWarning, Briefcase, Zap
-} from 'lucide-react';
-import { 
+  DollarSign, Activity, } from 'lucide-react';
+import type { 
   RiskSummary, FinancialSummary, PredictionSummary, 
   BudgetSummary, ComplianceSummary
 } from '../../types/dashboard';
@@ -17,7 +16,7 @@ interface TopKpiCardsProps {
 }
 
 export const TopKpiCards: React.FC<TopKpiCardsProps> = ({
-  risk, financial, prediction, budget, compliance
+  risk, financial, prediction, compliance
 }) => {
   const formatCurrency = (val: number) => {
     if (val >= 10000000) return `₹${(val / 10000000).toFixed(1)} Cr`;

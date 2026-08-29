@@ -95,7 +95,7 @@ class OptimizationEngine:
             total_cost=total_cost,
             risk_reduction=risk_reduction,
             financial_reduction=fin_reduction,
-            metadata_={"explanation": why_selected}
+            portfolio_metadata={"explanation": why_selected}
         )
         self.db.add(portfolio)
         self.db.commit()
@@ -153,8 +153,8 @@ class OptimizationEngine:
         if n == 0 or budget <= 0:
             return [], "optimal"
             
-        if n > 500:
-            # Fallback to greedy heuristic if N is too large
+        if n > 500 or budget > 100000:
+            # Fallback to greedy heuristic if N is too large or budget is too big to fit in a DP array safely
             return self._run_greedy(candidates, budget, request), "heuristic"
 
         # Scale budget and costs to integers (e.g. up to 2 decimal places)

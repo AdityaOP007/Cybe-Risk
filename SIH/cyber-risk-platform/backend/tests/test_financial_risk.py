@@ -37,7 +37,7 @@ def create_test_risk_score(db: Session, org_id: str, asset_id: str) -> str:
         score=72.0,
         risk_level="high",
         calculation_version="v1.0",
-        metadata_={"factors": {"likelihood": 72.0}, "confidence": 100}
+        risk_metadata={"factors": {"likelihood": 72.0}, "confidence": 100}
     )
     db.add(rs)
     db.commit()

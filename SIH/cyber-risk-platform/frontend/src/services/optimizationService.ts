@@ -5,22 +5,19 @@ import type {
   CybersecurityInvestment 
 } from '../types/optimization';
 
-const API_PREFIX = '/optimization';
+const API_PREFIX = '/api/v1/optimization';
 
 export const optimizationService = {
   getInvestments: async (): Promise<CybersecurityInvestment[]> => {
-    const response = await api.get(`${API_PREFIX}/investments`);
-    return response.data;
+    return api.get<CybersecurityInvestment[]>(`${API_PREFIX}/investments`);
   },
 
   runOptimization: async (request: OptimizationRunRequest): Promise<OptimizationRun> => {
-    const response = await api.post(`${API_PREFIX}/run`, request);
-    return response.data;
+    return api.post<OptimizationRun>(`${API_PREFIX}/run`, request);
   },
 
   getOptimizationRuns: async (): Promise<OptimizationRun[]> => {
-    const response = await api.get(`${API_PREFIX}/runs`);
-    return response.data;
+    return api.get<OptimizationRun[]>(`${API_PREFIX}/runs`);
   }
 };
 

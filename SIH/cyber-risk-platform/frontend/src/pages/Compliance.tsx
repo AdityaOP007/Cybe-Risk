@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Building2, ShieldCheck, AlertTriangle, FileWarning, ExternalLink, 
-  RefreshCw, CheckCircle2, XCircle, Info, Activity, Network
+  AlertTriangle, FileWarning, RefreshCw, CheckCircle2, XCircle, Network
 } from 'lucide-react';
-import { 
+import type {  
   ComplianceFramework, FrameworkAssessmentSummary, ComplianceGap, CrosswalkResponse 
-} from '../types/compliance';
+ } from "../types/compliance";
 import { 
   getFrameworks, getFrameworkSummary, getGaps, assessFramework, getControlCrosswalk
 } from '../services/complianceService';
@@ -16,7 +15,7 @@ const Compliance: React.FC = () => {
   const [gaps, setGaps] = useState<ComplianceGap[]>([]);
   const [loading, setLoading] = useState(true);
   const [assessing, setAssessing] = useState<string | null>(null);
-  const [selectedControl, setSelectedControl] = useState<string | null>(null);
+  const [, setSelectedControl] = useState<string | null>(null);
   const [crosswalk, setCrosswalk] = useState<CrosswalkResponse | null>(null);
 
   useEffect(() => {

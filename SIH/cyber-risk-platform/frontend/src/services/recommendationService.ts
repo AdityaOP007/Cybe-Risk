@@ -1,17 +1,15 @@
 import api from './api';
-import { Recommendation } from '../types/recommendation';
+import type {  Recommendation  } from "../types/recommendation";
 
-const API_PREFIX = '/recommendations';
+const API_PREFIX = '/api/v1/recommendations';
 
 export const recommendationService = {
   generateRecommendations: async (): Promise<Recommendation[]> => {
-    const response = await api.post(`${API_PREFIX}/generate`);
-    return response.data;
+    return api.post<Recommendation[]>(`${API_PREFIX}/generate`);
   },
 
   getRecommendations: async (): Promise<Recommendation[]> => {
-    const response = await api.get(`${API_PREFIX}/`);
-    return response.data;
+    return api.get<Recommendation[]>(`${API_PREFIX}/`);
   },
 
   updateRecommendationStatus: async (
@@ -25,8 +23,7 @@ export const recommendationService = {
       updateData.completed_at = new Date().toISOString();
     }
     
-    const response = await api.patch(`${API_PREFIX}/${id}`, updateData);
-    return response.data;
+    return api.patch<Recommendation>(`${API_PREFIX}/${id}`, updateData);
   }
 };
 

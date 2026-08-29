@@ -10,18 +10,20 @@ const API_BASE_URL =
 
 export interface HealthResponse {
   status: string;
+  database: string;
+  version: string;
 }
 
 /**
  * Generic fetch wrapper with error handling.
- * Prevents leaking raw error details to the UI.
+ * Returns parsed JSON directly (not wrapped in {data}).
  */
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`;
   
-  const headers = {
+  const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    ...options.headers,
+    ...(options.headers as Record<string, string>),
   };
 
   const response = await fetch(url, { ...options, headers });
@@ -43,5 +45,7 @@ export default {
   get: <T>(endpoint: string) => request<T>(endpoint, { method: 'GET' }),
   post: <T>(endpoint: string, data?: any) => request<T>(endpoint, { method: 'POST', body: data ? JSON.stringify(data) : undefined }),
   put: <T>(endpoint: string, data?: any) => request<T>(endpoint, { method: 'PUT', body: data ? JSON.stringify(data) : undefined }),
+  patch: <T>(endpoint: string, data?: any) => request<T>(endpoint, { method: 'PATCH', body: data ? JSON.stringify(data) : undefined }),
   delete: <T>(endpoint: string) => request<T>(endpoint, { method: 'DELETE' }),
 };
+

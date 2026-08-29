@@ -1,5 +1,5 @@
 import api from './api';
-import { Asset, AssetCreateRequest, AssetUpdateRequest, PaginatedAssets, AssetFilters, AssetPosture } from '../types/asset';
+import type {  Asset, AssetCreateRequest, AssetUpdateRequest, PaginatedAssets, AssetFilters, AssetPosture  } from "../types/asset";
 
 export const assetService = {
   getAssets: async (filters?: AssetFilters): Promise<PaginatedAssets> => {

@@ -1,15 +1,14 @@
 import api from './api';
-import { ExecutiveDashboardData } from '../types/dashboard';
+import type {  ExecutiveDashboardData  } from "../types/dashboard";
 
 export const getExecutiveDashboard = async (): Promise<ExecutiveDashboardData> => {
-  const response = await api.get('/dashboard/executive');
-  return response.data;
+  return api.get<ExecutiveDashboardData>('/api/v1/dashboard/executive');
 };
 
 export const acknowledgeAlert = async (alertId: string): Promise<void> => {
-  await api.post(`/dashboard/alerts/${alertId}/acknowledge`);
+  await api.post(`/api/v1/dashboard/alerts/${alertId}/acknowledge`);
 };
 
 export const resolveAlert = async (alertId: string): Promise<void> => {
-  await api.post(`/dashboard/alerts/${alertId}/resolve`);
+  await api.post(`/api/v1/dashboard/alerts/${alertId}/resolve`);
 };

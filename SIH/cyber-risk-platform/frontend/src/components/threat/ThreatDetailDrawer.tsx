@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, ShieldAlert, AlertTriangle, Crosshair, Network } from 'lucide-react';
+import { X, ShieldAlert, AlertTriangle, Network } from 'lucide-react';
 import { format } from 'date-fns';
 import type { ThreatIntelligenceRecord } from '../../types/threatIntelligence';
 

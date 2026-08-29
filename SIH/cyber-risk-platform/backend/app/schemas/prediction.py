@@ -48,7 +48,7 @@ class RiskPredictionCreate(RiskPredictionBase):
     model_version: str
     feature_version: str
     dataset_version: str
-    metadata_: Optional[Dict[str, Any]] = Field(None, alias="metadata")
+    prediction_metadata: Optional[Dict[str, Any]] = None
 
 class RiskPredictionRead(RiskPredictionBase):
     id: uuid.UUID
@@ -65,7 +65,7 @@ class RiskPredictionRead(RiskPredictionBase):
     actual_risk: Optional[float] = None
     prediction_error: Optional[float] = None
     
-    metadata_: Optional[Dict[str, Any]] = Field(None, alias="metadata")
+    prediction_metadata: Optional[Dict[str, Any]] = None
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True, populate_by_name=True)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AssetCreateRequest, Asset } from '../../types/asset';
+import type {  AssetCreateRequest, Asset  } from "../../types/asset";
 import { X } from 'lucide-react';
 
 interface AssetFormProps {

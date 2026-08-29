@@ -46,7 +46,7 @@ def calculate_asset_prediction(
                 horizon_days=horizon
             )
             forecasts[horizon] = pred
-            last_metadata = pred.metadata_
+            last_metadata = pred.prediction_metadata
         except ValueError as e:
             # Propagate up e.g., "Insufficient historical data"
             raise HTTPException(status_code=422, detail=str(e))
@@ -101,7 +101,7 @@ def get_asset_prediction(
         )
         if pred:
             forecasts[horizon] = pred
-            last_metadata = pred.metadata_
+            last_metadata = pred.prediction_metadata
 
     if not forecasts:
         raise HTTPException(status_code=404, detail="No predictions found for asset")
